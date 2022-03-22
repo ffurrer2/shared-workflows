@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: MIT
+name: yamllint
+
+on:
+  workflow_call:
+    inputs:
+      additional_args:
+        description: 'Additional yamllint arguments'
+        required: false
+        default: ''
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  yamllint:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+    - name: yamllint
+      uses: docker://ghcr.io/ffurrer2/yamllint:latest
+      with:
+        entrypoint: /usr/bin/yamllint
+        args: '--config-file .github/linters/.yaml-lint.yml --format github --strict ${{ inputs.additional_args }} .'

@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: MIT
+name: markdownlint
+
+on:
+  workflow_call:
+    inputs:
+      files:
+        description: 'files, directories, or globs. Default: `.`'
+        required: false
+        default: '.'
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  markdownlint:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+    - name: markdownlint
+      uses: nosborn/github-action-markdown-cli@v3.0.1
+      with:
+        config_file: .github/linters/.markdown-lint.yml
+        files: '${{ inputs.files }}'

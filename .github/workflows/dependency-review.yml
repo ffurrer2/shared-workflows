@@ -20,4 +20,4 @@ jobs:
         persist-credentials: false
 
     - name: Dependency Review
-      uses: actions/dependency-review-action@v1
+      uses: actions/dependency-review-action@v2

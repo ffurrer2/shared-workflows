@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   dependency-review:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
     steps:
@@ -20,4 +20,4 @@ jobs:
         persist-credentials: false
 
     - name: Dependency Review
-      uses: actions/dependency-review-action@v1
+      uses: actions/dependency-review-action@v2

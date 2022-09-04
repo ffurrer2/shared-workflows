@@ -2,28 +2,30 @@
 name: Lint GitHub Actions workflows
 
 on:
-  push:
-    branches:
-    - main
-    - feature/**
-    paths-ignore:
-    - '**.md'
+  workflow_call:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  ACTIONLINT_VERSION: 1.6.17
 
 jobs:
   actionlint:
-    name: Actionlint
     runs-on: ubuntu-22.04
+    permissions: {}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
     - name: Setup actionlint
-      id: setup_actionlint
       shell: bash
       run: |
-        bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+        curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash | bash -s -- ${{ env.ACTIONLINT_VERSION }} /usr/local/bin
+        actionlint -version
 
     - name: Check workflow files
       shell: bash
       run: |
-        ${{ steps.setup_actionlint.outputs.executable }} -color
+        actionlint -color -shellcheck shellcheck

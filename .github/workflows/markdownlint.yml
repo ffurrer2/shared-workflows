@@ -17,11 +17,13 @@ concurrency:
 jobs:
   markdownlint:
     runs-on: ubuntu-22.04
+    permissions: {}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
         persist-credentials: false
+
     - name: markdownlint
       uses: nosborn/github-action-markdown-cli@v3
       with:

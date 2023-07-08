@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 name: 'GitHub Release'
 description: 'Create a GitHub release.'
 inputs:

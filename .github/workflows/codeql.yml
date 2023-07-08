@@ -8,6 +8,10 @@ on:
         description: 'The languages to be analysed.'
         required: true
         type: string
+      config-file:
+        description: 'The path to the CodeQL config file.'
+        required: false
+        type: string
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -17,6 +21,7 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-22.04
+    timeout-minutes: 360
     permissions:
       actions: read
       contents: read
@@ -24,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ${{fromJSON(inputs.languages)}}
+        language: ${{ fromJSON(inputs.languages) }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -35,6 +40,7 @@ jobs:
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
+        config-file: ${{ inputs.config-file }}
 
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2

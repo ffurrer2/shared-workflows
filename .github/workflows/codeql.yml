@@ -36,6 +36,12 @@ jobs:
       with:
         persist-credentials: false
 
+    - name: Setup Go
+      uses: actions/setup-go@v4
+      with:
+        go-version-file: './go.mod'
+      if: contains(fromJSON(inputs.languages), 'go')
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:

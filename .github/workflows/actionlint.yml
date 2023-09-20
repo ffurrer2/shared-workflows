@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  ACTIONLINT_VERSION: 1.6.23
+  ACTIONLINT_VERSION: 1.6.26
 
 jobs:
   actionlint:
@@ -17,7 +17,7 @@ jobs:
     permissions: {}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup actionlint
       shell: bash
@@ -28,4 +28,4 @@ jobs:
     - name: Check workflow files
       shell: bash
       run: |
-        actionlint -color -shellcheck shellcheck
+        actionlint -color -shellcheck shellcheck -verbose

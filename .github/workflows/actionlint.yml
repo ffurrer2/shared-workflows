@@ -13,7 +13,7 @@ env:
 
 jobs:
   actionlint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     permissions: {}
     steps:
     - name: Checkout

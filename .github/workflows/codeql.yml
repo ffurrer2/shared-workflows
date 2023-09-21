@@ -20,8 +20,8 @@ concurrency:
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-22.04
-    timeout-minutes: 360
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
     permissions:
       actions: read
       contents: read
@@ -53,3 +53,5 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+      with:
+        category: '/language:${{matrix.language}}'

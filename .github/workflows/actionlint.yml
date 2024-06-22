@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  ACTIONLINT_VERSION: 1.6.26
+  ACTIONLINT_VERSION: latest
 
 jobs:
   actionlint:

@@ -25,7 +25,7 @@ jobs:
         persist-credentials: false
 
     - name: markdownlint
-      uses: nosborn/github-action-markdown-cli@v3
+      uses: nosborn/github-action-markdown-cli@58bcfd1af530d87a13d51b76e6713b52602e3613 # v3.4.0
       with:
         config_file: .github/linters/.markdown-lint.yml
         files: '${{ inputs.files }}'

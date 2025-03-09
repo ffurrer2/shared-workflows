@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# Shared GitHub workflows
+# Shared GitHub Actions workflows
 
 ## License
 

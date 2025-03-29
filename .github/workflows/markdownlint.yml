@@ -9,6 +9,11 @@ on:
         required: false
         default: '.'
         type: string
+      ignore-files:
+        description: 'files to ignore/exclude (file, directory, glob).'
+        required: false
+        default: ''
+        type: string
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -29,3 +34,4 @@ jobs:
       with:
         config_file: .github/linters/.markdown-lint.yml
         files: '${{ inputs.files }}'
+        ignore_files: '${{ inputs.ignore-files }}'

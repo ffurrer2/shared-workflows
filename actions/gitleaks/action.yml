@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 name: 'gitleaks'
 description: 'Run gitleaks to detect secrets in your repository.'
 inputs:
